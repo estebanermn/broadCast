@@ -19,12 +19,15 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         String action = intent.getAction();
 
         Intent newIntent = new Intent(context, NotificationActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, newIntent, 0);
 
+        PendingIntent pendingIntent = PendingIntent
+                .getActivity(context, 1, newIntent, 0);
         if (action.equals(MainActivity.BROADCAST_ACTION)) {
             Toast.makeText(context, "Acción ocurrió", Toast.LENGTH_SHORT).show();
 
-            NotificationCompat.Builder notificacion = new NotificationCompat.Builder(context, "Canal")
+
+            NotificationCompat.Builder notification = new NotificationCompat
+                    .Builder(context, "Canal")
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("Notificación nueva")
                     .setContentText("Esta es una nueva notificación")
@@ -33,16 +36,16 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                     .setAutoCancel(true);
 
             NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-            managerCompat.notify(0, notificacion.build());
-
+            managerCompat.notify(0, notification.build());
         }
 
-        if(action.equals(MainActivity.AIRPLANE_MODE)){
-            NotificationCompat.Builder notificacion = new NotificationCompat
+
+        if (action.equals(MainActivity.AIRPLANE_MODE)) {
+            NotificationCompat.Builder notification = new NotificationCompat
                     .Builder(context, "Canal")
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("Notificación modo avión")
-                    .setContentText("Cambio a modo avión")
+                    .setContentText("Modo avión")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
@@ -51,7 +54,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
             int unique_id = random.nextInt(999);
 
             NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-            managerCompat.notify(unique_id, notificacion.build());
+            managerCompat.notify(unique_id, notification.build());
         }
     }
 }

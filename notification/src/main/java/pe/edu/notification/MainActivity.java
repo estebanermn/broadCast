@@ -25,18 +25,6 @@ public class MainActivity extends AppCompatActivity {
         crearNotificationChannel();
     }
 
-    private void register() {
-
-        MyBroadcastReceiver broadcastReceiver = new MyBroadcastReceiver();
-
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(BROADCAST_ACTION);
-        intentFilter.addAction(AIRPLANE_MODE);
-
-        this.registerReceiver(broadcastReceiver, intentFilter);
-    }
-
-
     private void crearNotificationChannel() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -52,4 +40,16 @@ public class MainActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
     }
+
+    private void register() {
+
+        MyBroadcastReceiver broadcastReceiver = new MyBroadcastReceiver();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BROADCAST_ACTION);
+        intentFilter.addAction(AIRPLANE_MODE);
+
+        this.registerReceiver(broadcastReceiver, intentFilter);
+    }
+
 }
